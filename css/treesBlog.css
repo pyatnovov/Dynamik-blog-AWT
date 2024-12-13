@@ -1090,7 +1090,6 @@ textarea[name="feedback"]:valid {
 .article-form {
   padding: 20px;
   border-radius: 8px;
-  width: 800px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: var(--defolt-white-color);
@@ -1211,6 +1210,13 @@ textarea[name="feedback"]:valid {
 /*=============================================
 =            Responsive styles for article detail and comments =
 =============================================*/
+
+.art-image {
+    max-width: 100%; /* Зображення не буде виходити за межі контейнера */
+    height: auto; /* Зберігає пропорції зображення */
+    display: block; /* Усуває зайві пробіли під зображенням */
+    margin: 0 auto; /* Центрує зображення (за потреби) */
+}
 
 @media (max-width: 768px) {
   .container.layout {
@@ -1456,6 +1462,7 @@ textarea[name="feedback"]:valid {
 .hiddenElm {
     display: none;
     visibility: hidden;
+    opacity: 0;
 }
   .medzi-div {
     display: flex;
