@@ -527,15 +527,17 @@
     <script id="template-comment-form" type="text/template">
     <section class="send_form border">
       <h3>Add a new comment</h3>
-      <form id="commentForm">
-          <label for="commentAuthor">Name:</label>
-          <input type="text" name="commentAuthor" id="commentAuthor" required>
+      <form id="commentForm" class="comment-form">
+          <label class="comment-form-label"for="commentAuthor">Name:</label>
+          <input class="comment-form-input"type="text" name="commentAuthor" id="commentAuthor" required>
           <br>
-          <label for="commentText">Comment:</label>
-          <textarea name="commentText" id="commentText" rows="5" required></textarea>
+          <label class="comment-form-label" for="commentText">Comment:</label>
+          <textarea class="comment-form-textarea" name="commentText" id="commentText" rows="5" required></textarea>
           <br>
-          <button type="submit">Send comment</button>
-          <button type="button" id="cancelComment">Cancel</button>
+          <div style="margin-right:auto; margin-left:auto; display:flex; text-align:center; gap:10px; justify-content:center;">
+          <button type="submit" class="comment-button">Send comment</button>
+          <button type="button"  class="comment-button"id="cancelComment">Cancel</button>
+          </div>
       </form>
     </section>
     </script>

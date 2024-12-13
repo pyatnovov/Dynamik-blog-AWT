@@ -2,7 +2,7 @@
 export default class articleFormsHandler {
   constructor(baseURL) {
     this.baseURL = baseURL;
-    this.HIDDEN_TAG = "travelBlog"; // Використовуємо travelBlog як прихований тег
+    this.HIDDEN_TAG = "travelBlog";
   }
 
   getCurrentUser() {
@@ -33,7 +33,7 @@ export default class articleFormsHandler {
       const formData = new FormData(form);
 
       let tags = formData.get("tags") || "";
-      tags = this.ensureHiddenTag(tags); // Додаємо travelBlog, якщо його немає
+      tags = this.ensureHiddenTag(tags);
 
       const articleData = {
         author: currentUser ? currentUser.fullName : formData.get("author"),
@@ -74,11 +74,9 @@ export default class articleFormsHandler {
       this.cancelFileUpload();
 
     if (articleId >= 0) {
-      // Редагування
       artForm.onsubmit = (event) => this.processArtEditFrmData(event);
       this.articleId = articleId;
     } else {
-      // Додавання нової статті
       artForm.onsubmit = (event) => this.processArtNewFrmData(event);
     }
   }
@@ -101,43 +99,6 @@ export default class articleFormsHandler {
       .classList.remove(this.cssCl2hideElm);
   }
 
-  // uploadImg() {
-  //   const files = this.formElements.namedItem("flElm").files;
-
-  //   if (files.length > 0) {
-  //     const imgLinkElement = this.formElements.namedItem("imageLink");
-  //     const fieldsetElement = this.formElements.namedItem("fsetFileUpload");
-  //     const btShowFileUploadElement =
-  //       this.formElements.namedItem("btShowFileUpload");
-
-  //     let imgData = new FormData();
-  //     imgData.append("file", files[0]);
-
-  //     fetch(`${this.baseURL}/fileUpload`, {
-  //       method: "POST",
-  //       body: imgData,
-  //     })
-  //       .then((response) => {
-  //         if (response.ok) {
-  //           return response.json();
-  //         } else {
-  //           throw new Error(
-  //             `Server responded with ${response.status}: ${response.statusText}`
-  //           );
-  //         }
-  //       })
-  //       .then((responseJSON) => {
-  //         imgLinkElement.value = responseJSON.fullFileUrl;
-  //         btShowFileUploadElement.classList.remove(this.cssCl2hideElm);
-  //         fieldsetElement.classList.add(this.cssCl2hideElm);
-  //       })
-  //       .catch((error) => {
-  //         window.alert(`Image upload failed. ${error.message}`);
-  //       });
-  //   } else {
-  //     window.alert("Please select an image file.");
-  //   }
-  // }
 
   uploadImg() {
     const files = this.formElements.namedItem("file").files;
@@ -162,7 +123,6 @@ export default class articleFormsHandler {
         })
         .then((responseJSON) => {
           console.log(responseJSON);
-          // Перевірте, що ваш сервер повертає fullFileUrl
           imgLinkElement.value = responseJSON.fullFileUrl;
           btShowFileUploadElement.classList.remove(this.cssCl2hideElm);
           fieldsetElement.classList.add(this.cssCl2hideElm);
@@ -286,7 +246,6 @@ export default class articleFormsHandler {
         .filter((tag) => tag);
     }
 
-    // Add hidden tag if not present
     if (!articleData.tags.includes(this.HIDDEN_TAG)) {
       articleData.tags.push(this.HIDDEN_TAG);
     }

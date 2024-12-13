@@ -1,5 +1,3 @@
-
-
 export default class ParamHashRouter {
   constructor(routes,inithash) {
     this.routes = routes;

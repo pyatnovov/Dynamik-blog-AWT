@@ -1010,7 +1010,6 @@ textarea[name="feedback"]:valid {
 .send_form {
   padding: 20px;
   border-radius: 8px;
-  width: 800px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: var(--default-white-color);
@@ -1359,48 +1358,13 @@ textarea[name="feedback"]:valid {
 /*=============================================
 =            Responsive styles for comment form =
 =============================================*/
-
-@media (max-width: 768px) {
-  #commentForm {
-    padding: 0.5rem;
-    width: 400px;
-  }
-
-  #commentForm label {
-    font-size: 0.95em;
-  }
-
-  #commentForm input[type="text"],
-  #commentForm textarea {
-    font-size: 0.9em;
-    padding: 0.5rem;
-  }
-
-  #commentForm button[type="submit"],
-  #commentForm button[type="button"] {
-    font-size: 0.95em;
-    padding: 0.5rem;
-  }
+.comment-form {
+  width: auto;
+}
+.comment-button {
+  width: auto;
 }
 
-/* Адаптація для дуже вузьких екранів до 480px */
-@media (max-width: 480px) {
-  #commentForm label {
-    font-size: 0.9em;
-  }
-
-  #commentForm input[type="text"],
-  #commentForm textarea {
-    font-size: 0.85em;
-    padding: 0.4rem;
-  }
-
-  #commentForm button[type="submit"],
-  #commentForm button[type="button"] {
-    font-size: 0.9em;
-    padding: 0.4rem;
-  }
-}
 
 /*=====  End of form for comment  ======*/
 .article-footer {

@@ -1,4 +1,4 @@
-// js/routes.js
+// routes.js
 import Mustache from "./mustache.js";
 import processOpnFrmData from "./addOpinion.js";
 import articleFormsHandler from "./articleFormsHandler.js";
@@ -550,7 +550,6 @@ function fetchAndDisplayMyArticles(targetElm) {
 }
 
 
-
 function createHtml4opinions(targetElm) {
   const opinionsFromStorage = localStorage.feedback;
   let opinions = [];
@@ -568,6 +567,7 @@ function createHtml4opinions(targetElm) {
     opinionsData
   );
 }
+
 
 function addCommentHandlers(
   artIdFromHash,
@@ -604,12 +604,11 @@ function addCommentHandlers(
       e.preventDefault();
       const fd = new FormData(commentForm);
       const text = fd.get("commentText");
+      let commentAuthor = fd.get("commentAuthor");
 
-      const storedUser = localStorage.getItem("currentUser");
-      const currentUser = storedUser
-        ? JSON.parse(storedUser)
-        : { fullName: "Anonymous" };
-      const commentAuthor = currentUser.fullName || "Anonymous";
+      if (!commentAuthor || commentAuthor.trim() === "") {
+        commentAuthor = "Anonymous";
+      }
 
       addComment(artIdFromHash, commentAuthor, text, (err) => {
         if (err) {
@@ -684,3 +683,4 @@ function addCommentHandlers(
     };
   }
 }
+
