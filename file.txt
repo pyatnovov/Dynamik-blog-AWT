@@ -1,0 +1,182 @@
+function addCommentHandlers(artIdFromHash, pageNumber, totalPages, responseJSON, targetElm, partials) {
+    const btAddComment = document.getElementById("btAddComment");
+    const addCommentForm = document.getElementById("addCommentForm");
+    const commentForm = document.getElementById("commentForm");
+    const cancelComment = document.getElementById("cancelComment");
+  
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      const cAuthorInput = document.getElementById("commentAuthor");
+      if (cAuthorInput) {
+        cAuthorInput.value = currentUser.fullName;
+        cAuthorInput.readOnly = true;
+      }
+  }
+  
+    if (btAddComment && addCommentForm && commentForm && cancelComment) {
+        // Обработчик кнопки "Add Comment"
+        btAddComment.addEventListener("click", () => {
+            addCommentForm.classList.toggle("hiddenElm");
+        });
+
+        // Обработчик кнопки "Cancel" в форме добавления комментария
+        cancelComment.addEventListener("click", () => {
+            addCommentForm.classList.add("hiddenElm");
+        });
+
+        // Обработчик отправки формы комментария
+        commentForm.onsubmit = (e) => {
+            e.preventDefault();
+            const fd = new FormData(commentForm);
+            const author = fd.get('commentAuthor');
+            const text = fd.get('commentText');
+
+            // Используем текущего пользователя как автора комментария
+            const storedUser = localStorage.getItem('currentUser');
+            const currentUser = storedUser ? JSON.parse(storedUser) : { fullName: "Anonymous" };
+            const commentAuthor = currentUser.fullName || "Anonymous";
+
+            addComment(artIdFromHash, commentAuthor, text, (err) => {
+                if (err) {
+                    alert("Ошибка при добавлении комментария");
+                    return;
+                }
+                alert("Комментарий добавлен!");
+                addCommentForm.classList.add("hiddenElm");
+                commentForm.reset();
+                // Обновляем комментарии на текущей странице
+                const currentCommentPage = responseJSON.commentPage || 1;
+
+                fetchComments(artIdFromHash, currentCommentPage, (err, updatedCommentsData) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+
+                    const updatedFinalData = {
+                        ...responseJSON,
+                        ...updatedCommentsData,
+                        backLink: `#articles/${pageNumber}/${totalPages}`,
+                        editLink: `#artEdit/${responseJSON.id}/${pageNumber}/${totalPages}`,
+                        deleteLink: `#artDelete/${responseJSON.id}/${pageNumber}/${totalPages}`,
+                        id: responseJSON.id,
+                        pageNumber: pageNumber,
+                        totalPages: totalPages
+                    };
+
+                    // Получение текущего пользователя
+                    const storedUser = localStorage.getItem('currentUser');
+                    const currentUser = storedUser ? JSON.parse(storedUser) : null;
+
+                    // Если пользователь автор статьи, показываем кнопки редактирования и удаления
+                    if (currentUser && currentUser.email === responseJSON.author) {
+                        updatedFinalData.canEdit = true;
+                        updatedFinalData.canDelete = true;
+                    } else {
+                        updatedFinalData.canEdit = false;
+                        updatedFinalData.canDelete = false;
+                    }
+
+                    // Обработка тегов для отображения (исключение скрытого тега)
+                    if (updatedFinalData.tags && updatedFinalData.tags.length > 0) {
+                        updatedFinalData.userTags = updatedFinalData.tags.filter(t => t !== HIDDEN_TAG).join(', ');
+                    } else {
+                        updatedFinalData.userTags = '';
+                    }
+
+                    const articleTemplate = document.getElementById("template-article").innerHTML;
+                    const renderedHtml = Mustache.render(articleTemplate, updatedFinalData, partials);
+                    document.getElementById(targetElm).innerHTML = renderedHtml;
+
+                    // Повторно назначаем обработчики
+                    addCommentHandlers(artIdFromHash, pageNumber, totalPages, updatedFinalData, targetElm, partials);
+                });
+            });
+        };
+    }
+}
+
+
+function fetchComments(artId, commentPage, callback) {
+    const maxComments = commentsPerPage + 1; // Запросить на одну больше, чтобы проверить наличие следующей страницы
+    const offset = (commentPage - 1) * commentsPerPage;
+    const url = `${urlBase}/article/${artId}/comment?max=${maxComments}&offset=${offset}`;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            let comments = response.comments.map(c => ({
+                author: c.author,
+                text: c.text
+            }));
+
+            let hasNextComments = false;
+            if (comments.length > commentsPerPage) {
+                hasNextComments = true;
+                comments.pop(); // Удалить лишний комментарий
+            }
+
+            callback(null, {
+                comments: comments,
+                commentPage: commentPage,
+                commentTotalPages: hasNextComments ? commentPage + 1 : commentPage,
+                hasPrevComments: commentPage > 1,
+                hasNextComments: hasNextComments,
+                prevCommentPage: commentPage - 1,
+                nextCommentPage: hasNextComments ? commentPage + 1 : null
+            });
+        } else {
+            callback("Ошибка при получении комментариев", null);
+        }
+    };
+
+    xhr.onerror = function () {
+        callback("Сетевая ошибка при получении комментариев", null);
+    };
+
+    xhr.send();
+}
+
+
+function addComment(artId, author, text, callback) {
+    const url = `${urlBase}/article/${artId}/comment`;
+    const data = { author: author, text: text };
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    xhr.onload = function () {
+        if (xhr.status === 201 || xhr.status === 200) {
+            callback(null);
+        } else {
+            callback("Ошибка при добавлении комментария");
+        }
+    };
+
+    xhr.onerror = function () {
+        callback("Сетевая ошибка");
+    };
+
+    xhr.send(JSON.stringify(data));
+}
+
+
+
+    <script id="template-comment-form" type="text/template">
+    <section class="send_form border">
+      <h3>Add a new comment</h3>
+      <form id="commentForm">
+          <label for="commentAuthor">Name:</label>
+          <input type="text" name="commentAuthor" id="commentAuthor" required>
+          <br>
+          <label for="commentText">Comment:</label>
+          <textarea name="commentText" id="commentText" rows="5" required></textarea>
+          <br>
+          <button type="submit">Send comment</button>
+          <button type="button" id="cancelComment">Cancel</button>
+      </form>
+    </section>
+    </script>

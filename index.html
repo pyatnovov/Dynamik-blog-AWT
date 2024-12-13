@@ -1,0 +1,680 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <link rel="stylesheet" href="public/css/printStyle.css" media="print" />
+    <link rel="stylesheet" href="./css/treesBlog.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="g_id_onload"
+      data-client_id="543444906260-4p9raf02ljq76vi767phojs0j0k61bgq.apps.googleusercontent.com"
+      data-context="signin"
+      data-ux_mode="popup"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="false"
+    ></div>
+    <header>
+      <a href="index.html" class="logo"
+        >Travel
+        <svg class="svg">
+          <use href="./img/svg/symbol-defs.svg#icon-airplane"></use>
+        </svg>
+      </a>
+      <div class="medzi-div">
+      <h1 class="header-title">My Blog about Travels</h1>
+      <div id="user-info" class="hiddenElm">
+        <img id="user-pic" src="" alt="User Picture" />
+        <span id="user-name"></span>
+        <button id="sign-out-button">Sign Out</button>
+      </div>
+            <div class="g_id_signin"
+            id="google-signin-button"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="signin_with"
+            data-size="large"
+            data-width="250"
+            data-logo_alignment="left">
+      </div>
+      </div>
+      <div class="menu">
+        <button id="menuTitle">Menu</button>
+
+        <nav id="menuIts" class="menu mnHide">
+          <a href="#welcome">Welcome!</a>
+          <a href="#articles/1/20/0">Articles</a>
+        <a href="#myArticles/1/1">My Articles</a>
+          <a href="#artInsert">Add articles</a>
+          <a href="#opinions">Visitor opinions</a>
+          <a href="#addOpinion">Add your opinion</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="router-view"></main>
+
+    <footer class="footer">
+      <p>&copy; Tourist site. All rights reserved.</p>
+      <a href="mailto:wowa6761@gmail.com" class="mail">Author mail</a>
+    </footer>
+
+    <script id="template-welcome" type="text/template">
+            <div class="main_div_index">
+              <aside class="aside_left">
+                <img
+                  src="./img/fig/reklama.png"
+                  class="border aside_pic1"
+                  alt="reklama"
+                />
+                <img src="./img/fig/q.png" class="border aside_pic2" alt="reklama" />
+              </aside>
+              <section class="main-section">
+                <h1 class="description">
+                  Discover the world with our help! We offer a wide selection of
+                  tours, interesting itineraries and guides that will help make your
+                  trip unforgettable.
+                </h1>
+
+                <ul class="advantages_list">
+                  <li class="advantage-item border">
+                    <h3>A wide selection of directions</h3>
+                    <p>
+                      From city tours to exotic trips, find the perfect destination
+                      for your leisure.
+                    </p>
+                  </li>
+
+                  <li class="advantage-item border">
+                    <h3>Reliable tour operators</h3>
+                    <p>
+                      We cooperate only with verified operators for your safety and
+                      comfort
+                    </p>
+                  </li>
+
+                  <li class="advantage-item border">
+                    <h3>Individual offers</h3>
+                    <p>We offer tours that are adapted to your needs and wishes.</p>
+                  </li>
+                </ul>
+
+                <h2 class="advantage_title">Popular tourist destinations</h2>
+
+                <ol class="destination-list">
+                  <li class="destination-item">
+                    <img
+                      srcset="
+                        ./img/fig/paris-medium.jpg 650w,
+                        ./img/fig/paris-large.jpg  800w,
+                        ./img/fig/paris-small.jpg  300w
+                      "
+                      sizes="(max-width:700px) 300px,(max-width: 850px) 650px,800px"
+                      class="img-destination"
+                      src="img/fig/paris-large.jpg"
+                      alt="Paris"
+                    />
+                    <p class="destination-text">Paris, France</p>
+                  </li>
+
+                  <li class="destination-item">
+                    <img
+                      srcset="
+                        ./img/fig/bali-medium.jpg 650w,
+                        ./img/fig/bali-large.jpg  800w,
+                        ./img/fig/bali-small.jpg  300w
+                      "
+                      sizes="(max-width:700px) 300px,(max-width: 850px) 650px,800px"
+                      class="img-destination"
+                      src="./img/fig/bali-large.jpg"
+                      alt="Bali"
+                    />
+                    <p class="destination-text">Bali, Indonesia</p>
+                  </li>
+
+                  <li class="destination-item">
+                    <img
+                      srcset="
+                        ./img/fig/rum-medium.jpg 650w,
+                        ./img/fig/rum-large.jpg  800w,
+                        ./img/fig/rum-small.jpg  300w
+                      "
+                      sizes="(max-width:700px) 300px,(max-width: 850px) 650px,800px"
+                      class="img-destination"
+                      src="./img/fig/rum-large.jpg"
+                      alt="Rome"
+                    />
+                    <p class="destination-text">Rome, Italy</p>
+                  </li>
+
+                  <li class="destination-item">
+                    <img
+                      srcset="
+                        ./img/fig/kviv-medium.jpg 650w,
+                        ./img/fig/kviv-large.jpg  800w,
+                        ./img/fig/kyiv-small.jpg  300w
+                      "
+                      sizes="(max-width:700px) 300px,(max-width: 850px) 650px,800px"
+                      class="img-destination"
+                      src="./img/fig/kviv-large.jpg"
+                      alt="Kyiv"
+                    />
+                    <p class="destination-text">Kyiv, Ukraine</p>
+                  </li>
+                </ol>
+
+                <div class="table-container">
+        <h2 class="table-title">Popular Travel Destinations</h2>
+        <table class="tourism-table">
+          <thead>
+            <tr class="table-header-row">
+              <th class="table-header">Country</th>
+              <th class="table-header">City</th>
+              <th class="table-header">Price ($)</th>
+              <th class="table-header">Rating</th>
+              <th class="table-header">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row">
+              <td class="table-data">France</td>
+              <td class="table-data">Paris</td>
+              <td class="table-data">150</td>
+              <td class="table-data">⭐⭐⭐⭐</td>
+              <td class="table-data">A romantic city with a rich history and culture.</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-data" rowspan="2">Italy</td>
+              <td class="table-data">Rome</td>
+              <td class="table-data">120</td>
+              <td class="table-data">⭐⭐⭐⭐⭐</td>
+              <td class="table-data">The eternal city with incredible architectural landmarks.</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-data">Venice</td>
+              <td class="table-data">180</td>
+              <td class="table-data">⭐⭐⭐⭐</td>
+              <td class="table-data">A beautiful city known for its canals and gondolas.</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-data">Japan</td>
+              <td class="table-data">Tokyo</td>
+              <td class="table-data">200</td>
+              <td class="table-data">⭐⭐⭐⭐</td>
+              <td class="table-data">A modern metropolis with traditional temples and gardens.</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-data" rowspan="2">Mexico</td>
+              <td class="table-data">Cancun</td>
+              <td class="table-data">100</td>
+              <td class="table-data">⭐⭐⭐</td>
+              <td class="table-data">A resort town with pristine beaches and turquoise waters.</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-data">Mexico City</td>
+              <td class="table-data">130</td>
+              <td class="table-data">⭐⭐⭐⭐</td>
+              <td class="table-data">The bustling capital with rich history and cultural attractions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+          </section>
+              <aside class="aside">
+                <div class="border" style="margin-bottom: 100px">
+                  <h3 class="aside_title">Interesting articles about travel</h3>
+                  <ul class="aside_list">
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Qatar Airways is set to acquire 25% of Virgin Australia. Who
+                        will be the winners?
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://theconversation.com/qatar-airways-is-set-to-acquire-25-of-virgin-australia-who-will-be-the-winners-240204"
+                        >Theconversation</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Only 10 countries have a ‘climate reliable’ outlook for
+                        snowsport events by 2040, WMO warns
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.euronews.com/green/2024/10/04/only-10-countries-have-a-climate-reliable-outlook-for-snowsport-events-by-2040-wmo-warns"
+                        >Euronews</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Tourism hotspot cuts council tax on second homes
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.bbc.com/news/articles/c8rd6208ln5o"
+                        >BBC</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Biophilia is the new travel trend – this is why it matters
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.weforum.org/agenda/2024/05/biophilia-nature-travel-trend-index/"
+                        >Weforum</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="border">
+                  <h3 class="aside_title">Interesting articles about travel</h3>
+                  <ul class="aside_list">
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Qatar Airways is set to acquire 25% of Virgin Australia. Who
+                        will be the winners?
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://theconversation.com/qatar-airways-is-set-to-acquire-25-of-virgin-australia-who-will-be-the-winners-240204"
+                        >Theconversation</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Only 10 countries have a ‘climate reliable’ outlook for
+                        snowsport events by 2040, WMO warns
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.euronews.com/green/2024/10/04/only-10-countries-have-a-climate-reliable-outlook-for-snowsport-events-by-2040-wmo-warns"
+                        >Euronews</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Tourism hotspot cuts council tax on second homes
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.bbc.com/news/articles/c8rd6208ln5o"
+                        >BBC</a
+                      >
+                    </li>
+                    <li class="aside_item">
+                      <p class="aside_desc">
+                        Biophilia is the new travel trend – this is why it matters
+                      </p>
+                      <a
+                        class="aside_link"
+                        href="https://www.weforum.org/agenda/2024/05/biophilia-nature-travel-trend-index/"
+                        >Weforum</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+    </script>
+
+    <script id="template-articles" type="text/template">
+
+    {{#articles}}
+    <article style="display: flex; flex-direction: column; flex-wrap:wrap;">
+    <h2><a href="#article/{{id}}/{{currentPage}}/{{totalPages}}/1">{{title}}</a></h2>
+
+      <p>by {{author}}</p>
+    </article>
+    {{/articles}}
+
+    <p>Displaying page {{currPage}} of {{pageCount}} pages.</p>
+    <nav style="color:white;">
+      {{#prevPage}}
+      <a href="#articles/{{prevPage}}/{{pageCount}}" style="color:#03b6fc;"><< Previous page</a>
+      {{/prevPage}}
+      |
+      {{#nextPage}}
+      <a href="#articles/{{nextPage}}/{{pageCount}}" style="color:#03b6fc;">Next page >></a>
+      {{/nextPage}}
+    </nav>
+    </script>
+    
+    <script id="template-articles-error" type="text/template">
+
+      <article>
+          <h2>Articles acquisition failed</h2>
+          <p>
+              {{errMessage}}
+          </p>
+      </article>
+    </script>
+
+    <script id="template-opinions" type="text/template">
+      <section id="feedbackSection">
+        <div id="feedbackContainer">
+          {{#opinions}}
+          <div class="feedback-item border">
+              <p class="feedback-name">{{name}}<small>({{created}})</small></p>
+              <p class="feedback-email">Email: {{mail}}</p>
+              {{#imgUrl}}
+              <img src="{{imgUrl}}" class="feedback-img" alt="User Image" style="width: 50px; height: 50px;" />
+              {{/imgUrl}}
+              {{^imgUrl}}
+                  <img src="./img/fig/not_found.png" class="feedback-img" alt="not found image" style="width: 50px; height: 50px;">
+              {{/imgUrl}}
+              <p class="feedback-feedback">Feedback: {{feedback}}</p>
+              <p class="feedback-country">Visited Country: {{visitedCountry}}</p>
+              <p class="feedback-interests">Interests: {{radioAndCheckBox.CheckBoxPressed}}</p>
+              <p class="feedback-source">Source: {{radioAndCheckBox.RadioPressed}}</p>
+          </div>
+          {{/opinions}}
+        </div>
+      </section>
+    </script>
+
+    <script id="template-addOpinion" type="text/template">
+      <article  id="artOpnFrm" >
+          <h2 style="text-align:center;">Your Opinion</h2>
+          <p style="text-align:center;">
+              Please, use the form below to state your opinion about this page.
+          </p>
+      <div class="feedback-section">
+        <form id="feedback-form" class="feedback-form border">
+          <label for="name" >Name:</label>
+          <input class="section-input" type="text" id="name" name="name" placeholder="What is your name?" pattern="[A-Za-zА-Яа-яČčĎďÉéÍíĹĺĽľŇňÓóÔôŔŕŠšŤťÚúÝýŽž0-9\-]{2,30}" required />
+
+          <label for="email">Email:</label>
+          <input class="section-input" pattern=".+@.+\..+" type="email" id="email" name="email" placeholder="Email please" title="Don't forget to insert a period in the domain part of the email address, otherwise it will cause errors." required />
+
+          <label for="image">Image URL:</label>
+          <input class="section-input" pattern="https?://.+" type="url" id="image" name="image" placeholder="https://"/>
+
+          <p class="question">How did you find our site?</p>
+          <label><input type="radio" id="radio_search" name="source" value="search_engine" class="section-input" /> Search Engine</label>
+          <label><input type="radio" id="radio_social" name="source" value="social_media" class="section-input" /> Social Media</label>
+          <label><input type="radio" id="radio_friend" name="source" value="friend_recommendation" class="section-input" /> Friend's Recommendation</label>
+
+
+          <p class="question">What topics are you interested in?</p>
+          <label><input class="section-input" id="checkbox1" type="checkbox" name="topics" value="destinations" /> Destinations</label>
+          <label><input class="section-input" id="checkbox2" type="checkbox" name="topics" value="tips" /> Travel Tips</label>
+          <label><input class="section-input" id="checkbox3" type="checkbox" name="topics" value="cultural" /> Cultural Experiences</label>
+
+
+          <label for="optional" class="question">Which countries have you already visited?</label>
+          <input id="optional" type="text" list="suggestions" placeholder="Enter a country"/>
+
+          <datalist id="suggestions">
+            <option value="Ukraine">
+            <option value="Slovakia">
+            <option value="Italy">
+            <option value="France">
+            <option value="Japan">
+            <option value="Australia">
+            <option value="Canada">
+            <option value="Brazil">
+            <option value="Greece">
+            <option value="Spain">
+            <option value="Thailand">
+            <option value="New Zealand">
+            <option value="Egypt">
+            <option value="Iceland">
+            <option value="Mexico">
+            <option value="South Africa">
+            <option value="Turkey">
+            <option value="India">
+            <option value="Argentina">
+            <option value="Portugal">
+            <option value="Indonesia">
+            <option value="Norway">
+          </datalist>
+
+
+
+
+          <label for="feedback">Your Feedback:</label>
+          <textarea id="feedback" maxlength="500" name="feedback" rows="4" required class="textarea" placeholder="Your experience is very important to us"></textarea>
+          <div class="form-buttons">
+          <button id="submit-button" type="submit">Submit</button>
+          <button type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+      </article>
+    </script>
+
+
+    <script id="template-article" type="text/template">
+    <div class="container layout">
+        <div class="opinionsContainer">
+            <article>
+                <h3>{{title}}</h3>
+                <p>by {{author}}</p>
+                {{#imageLink}}
+                <figure>
+                    <img src="{{imageLink}}" alt="article figure" class="border" style="width: 500px;height:500px"/>
+                </figure>
+                {{/imageLink}}
+                <div>{{{content}}}</div>
+                <p>Keywords: {{tags}}</p>
+            </article>
+
+            <footer class="article-footer">
+                <a href="{{backLink}}" class="linkAsButton border"><< Back</a>
+                <a href="{{editLink}}" class="linkAsButton border">Edit</a>
+                <a href="{{deleteLink}}" class="linkAsButton border">Delete</a>
+                <a href="#menuTitle" class="linkAsButton border">Up to the menu</a>
+            </footer>
+        </div>
+
+    <div class="opinions-container border" id="commentsSection">
+    <h2 class="comments-title">Comments (Page {{commentPage}} of {{commentTotalPages}})</h2>
+    {{#comments}}
+        <section class="comment border">
+            <h4 class="comment-author">Author : {{author}}</h4>
+            <p class="comment-text">Commet : {{text}}</p>
+        </section>
+    {{/comments}}
+    {{^comments}}
+        <p class="no-comments">No comments yet.</p>
+    {{/comments}}
+
+    <div class="comment-navigation">
+        {{#hasPrevComments}}
+            <a href="#article/{{id}}/{{pageNumber}}/{{totalPages}}/{{prevCommentPage}}" class="comment-nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        {{/hasPrevComments}}
+
+        {{#hasNextComments}}
+            <a href="#article/{{id}}/{{pageNumber}}/{{totalPages}}/{{nextCommentPage}}" class="comment-nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        {{/hasNextComments}}
+    </div>
+
+    <button id="btAddComment" class="add-comment-button">Add Comment</button>
+
+    </div>
+
+      <div id="addCommentForm" class="add-comment-form hiddenElm">
+        {{> commentForm}}
+    </div>
+
+    </div>
+    </script>
+
+    <script id="template-comment-form" type="text/template">
+    <section class="send_form border">
+      <h3>Add a new comment</h3>
+      <form id="commentForm">
+          <label for="commentAuthor">Name:</label>
+          <input type="text" name="commentAuthor" id="commentAuthor" required>
+          <br>
+          <label for="commentText">Comment:</label>
+          <textarea name="commentText" id="commentText" rows="5" required></textarea>
+          <br>
+          <button type="submit">Send comment</button>
+          <button type="button" id="cancelComment">Cancel</button>
+      </form>
+    </section>
+    </script>
+
+    <script id="template-article-form" type="text/template">
+    <article class="article-section">
+    <h2 class="article-title">{{formTitle}}</h2>
+    <form id="articleForm" class="article-form">
+    <label for="author" class="form-label">Author:</label>
+    <input type="text" name="author" id="author" value="{{author}}" class="form-input" maxlength="100" title="Article author, max. length 100 characters." />
+
+    <label for="title" class="form-label">Title:</label>
+    <input type="text" name="title" id="title" value="{{title}}" class="form-input" maxlength="100" required title="Article title, mandatory item, max. length: 100 characters." />
+
+    <label for="imageLink" class="form-label">Image (url):</label>
+    <input type="url" name="imageLink" id="imageLink" value="{{imageLink}}" class="form-input" maxlength="100" title="Image URL, max. length 100 characters." />
+
+    <button type="button" id="btShowFileUpload" name="btShowFileUpload" class="button">Upload image</button>
+    <fieldset class="file-upload-section hiddenElm" id="fsetFileUpload" name="fsetFileUpload">
+        <legend>Image Upload</legend>
+        <input type="file" id="flElm" name="file" class="file-input" accept="image/jpeg, image/png" />
+        <button type="button" id="btFileUpload" name="btFileUpload" class="button">Send image to server</button>
+        <button type="button" id="btCancelFileUpload" name="btCancelFileUpload" class="button">Cancel uploading</button>
+    </fieldset>
+
+
+    <label for="content" class="form-label">Article content:</label>
+    <textarea name="content" id="content" class="form-textarea" required spellcheck="true" lang="sk">{{content}}</textarea>
+
+    <label for="tags" class="form-label">Keywords:</label>
+    <input type="text" name="tags" id="tags" value="{{tags}}" class="form-input" placeholder="e.g. village, drama" />
+
+    <div class="form-buttons">
+    <button type="reset" class="button reset-button">Reset Form</button>
+    <button type="submit" class="button submit-button">{{submitBtTitle}}</button>
+    </div>
+    </form>
+    <footer class="article-footer">
+    <a href="{{backLink}}" class="footer-link"><< Späť</a>
+    <a href="#menuTitle" class="footer-link">Do menu</a>
+    </footer>
+    </article>
+    </script>
+
+
+    <script id="template-my-articles" type="text/template">
+      <div class="container layout">
+        <div class="opinionsContainer">
+          <h1 style="text-align: center; margin-bottom: 10px">My Articles</h1>
+          {{#articles}}
+            <article style="display: flex; flex-direction: column; flex-wrap:wrap;height:180px;">
+              <h2><a href="{{detailLink}}">{{title}}</a></h2> 
+              <p>by {{author}}</p>
+              <p>{{{content}}}</p>
+              {{#tags}}
+                <p>#{{tags}}</p>
+              {{/tags}}
+            </article>
+          {{/articles}}
+
+          {{^articles}}
+            <p>No articles available.</p>
+          {{/articles}}
+        </div>
+      </div>
+    </script>
+
+    <script type="module" src="js/index.js"></script>
+
+    <script>
+      // Глобальный объект для хранения данных пользователя
+      let currentUser = null;
+
+      function handleCredentialResponse(response) {
+        const token = response.credential;
+        const payload = JSON.parse(atob(token.split(".")[1]));
+
+        // Сохранение необходимых данных
+        currentUser = {
+          id: payload.sub,
+          givenName: payload.given_name,
+          familyName: payload.family_name,
+          fullName: `${payload.given_name} ${payload.family_name}`,
+          email: payload.email,
+          picture: payload.picture,
+        };
+
+        // Сохранение в localStorage для сохранения состояния
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        // Обновление интерфейса
+        updateUIOnSignIn();
+      }
+
+      // Функция обновления интерфейса после входа
+      function updateUIOnSignIn() {
+        // Скрыть кнопку входа
+        document
+          .getElementById("google-signin-button")
+          .classList.add("hiddenElm");
+
+        // Показать информацию о пользователе
+        const userInfoDiv = document.getElementById("user-info");
+        document.getElementById("user-pic").src = currentUser.picture;
+        document.getElementById("user-name").textContent = currentUser.fullName;
+        userInfoDiv.classList.remove("hiddenElm");
+      }
+
+      // Функция выхода
+      function signOut() {
+        google.accounts.id.disableAutoSelect();
+
+        // Очистка данных пользователя
+        currentUser = null;
+        localStorage.removeItem("currentUser");
+
+        // Обновление интерфейса
+        document.getElementById("user-info").classList.add("hiddenElm");
+        document
+          .getElementById("google-signin-button")
+          .classList.remove("hiddenElm");
+      }
+
+      // Добавление слушателя события для кнопки выхода
+      window.onload = function () {
+        // Проверка, вошел ли пользователь ранее
+        const storedUser = localStorage.getItem("currentUser");
+        if (storedUser) {
+          currentUser = JSON.parse(storedUser);
+          updateUIOnSignIn();
+        }
+
+        const signOutButton = document.getElementById("sign-out-button");
+        if (signOutButton) {
+          signOutButton.addEventListener("click", signOut);
+        }
+      };
+    </script>
+
+    <script src="https://accounts.google.com/gsi/client"></script>
+  </body>
+</html>
