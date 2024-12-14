@@ -1032,7 +1032,6 @@ textarea[name="feedback"]:valid {
   border-radius: 0.5rem;
   margin: 0 auto;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  background-color: var(--defolt-white-color);
   color: var(--defolt-white-color);
 }
 
@@ -1440,8 +1439,8 @@ textarea[name="feedback"]:valid {
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  background-color: var(--defolt-white-color);
-  color: var(--defolt-white-color);
+  /* background-color: var(--defolt-white-color);
+  color: var(--defolt-white-color); */
 }
 
 .comments-title {
@@ -1510,7 +1509,6 @@ textarea[name="feedback"]:valid {
 .add-comment-form {
   margin-top: 1.25rem;
   padding: 1.25rem;
-  background-color: var(--defolt-white-color);
 }
 
 

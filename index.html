@@ -3,8 +3,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link type="Image/x-icon" href="https://img.icons8.com/?size=100&id=12665&format=png&color=FFFFFF" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home page</title>
+    <title>Travel</title>
     <link rel="stylesheet" href="public/css/printStyle.css" media="print" />
     <link rel="stylesheet" href="./css/travelBlog.css" />
     <link
@@ -480,7 +481,7 @@
             </article>
 
             <footer class="article-footer">
-                <a href="{{backLink}}" class="linkAsButton border"><< Back</a>
+                 <a href="#" class="linkAsButton border back-button"><< Back</a>
                 <a href="{{editLink}}" class="linkAsButton border">Edit</a>
                 <a href="{{deleteLink}}" class="linkAsButton border">Delete</a>
                 <a href="#menuTitle" class="linkAsButton border">Up to the menu</a>
@@ -569,6 +570,9 @@
 
     <label for="tags" class="form-label">Keywords:</label>
     <input type="text" name="tags" id="tags" value="{{tags}}" class="form-input" placeholder="e.g. village, drama" />
+    <!-- Приховуємо поле для тегів -->
+    <!-- <input type="hidden" name="tags" id="tags" value="{{tags}}" /> -->
+
 
     <div class="form-buttons">
     <button type="reset" class="button reset-button">Reset Form</button>
@@ -576,8 +580,7 @@
     </div>
     </form>
     <footer class="article-footer">
-    <a href="{{backLink}}" class="footer-link"><< Späť</a>
-    <a href="#menuTitle" class="footer-link">Do menu</a>
+    <a href="#" class="linkAsButton border back-button"><< Back</a>
     </footer>
     </article>
     </script>
