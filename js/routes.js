@@ -511,45 +511,6 @@ function fetchAndDisplayArticles(
   ajax.send();
 }
 
-function fetchAndDisplayMyArticles(targetElm) {
-  const url = `${urlBase}/article?tag=travelBlog`;
-
-  const ajax = new XMLHttpRequest();
-  ajax.open("GET", url, true);
-
-  ajax.onload = function () {
-    if (this.status === 200) {
-      const responseData = JSON.parse(this.responseText);
-
-      const filteredArticles = responseData.articles
-        .filter((article) => article.tags.includes("travelBlog"))
-        .map((article) => ({
-          ...article,
-          detailLink: `#article/${article.id}/1/1/1`,
-        }));
-
-      const dataForRender = {
-        articles: filteredArticles, 
-      };
-
-      const articlesTemplate = document.getElementById(
-        "template-my-articles"
-      ).innerHTML;
-      const rendered = Mustache.render(articlesTemplate, dataForRender);
-      document.getElementById(targetElm).innerHTML = rendered;
-    } else {
-      alert("Error: " + this.statusText);
-    }
-  };
-
-  ajax.onerror = function () {
-    alert("Network error while retrieving articles.");
-  };
-
-  ajax.send();
-}
-
-
 function createHtml4opinions(targetElm) {
   const opinionsFromStorage = localStorage.feedback;
   let opinions = [];
@@ -567,7 +528,6 @@ function createHtml4opinions(targetElm) {
     opinionsData
   );
 }
-
 
 function addCommentHandlers(
   artIdFromHash,
@@ -684,3 +644,45 @@ function addCommentHandlers(
   }
 }
 
+function fetchAndDisplayMyArticles(targetElm) {
+  const url = `${urlBase}/article?tag=${HIDDEN_TAG}`;
+
+  const ajax = new XMLHttpRequest();
+  ajax.open("GET", url, true);
+
+  ajax.onload = function () {
+    if (this.status === 200) {
+      const responseData = JSON.parse(this.responseText);
+
+      const filteredArticles = responseData.articles
+        .filter((article) => article.tags.includes(HIDDEN_TAG))
+        .map((article) => {
+          // Видаляємо тег travelBlog
+          const visibleTags = article.tags.filter((tag) => tag !== HIDDEN_TAG);
+          return {
+            ...article,
+            detailLink: `#article/${article.id}/1/1/1`,
+            tags: visibleTags.join(", "), // Об'єднуємо залишені теги
+          };
+        });
+
+      const dataForRender = {
+        articles: filteredArticles,
+      };
+
+      const articlesTemplate = document.getElementById(
+        "template-my-articles"
+      ).innerHTML;
+      const rendered = Mustache.render(articlesTemplate, dataForRender);
+      document.getElementById(targetElm).innerHTML = rendered;
+    } else {
+      alert("Error: " + this.statusText);
+    }
+  };
+
+  ajax.onerror = function () {
+    alert("Network error while retrieving articles.");
+  };
+
+  ajax.send();
+}

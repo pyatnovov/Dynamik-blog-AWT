@@ -633,7 +633,7 @@ article p {
 }
 
 .advantage-item:hover {
-  transform: rotateY(1.25rem);
+  transform: rotateY(20deg);
   background-color: var(--hover-card-color);
 }
 
@@ -1262,14 +1262,14 @@ textarea[name="feedback"]:valid {
 
 
 /*=============================================
-=            Responsive styles for article detail and comments =
+=Responsive styles for article detail and comments =
 =============================================*/
 
 .art-image {
-    max-width: 100%; /* Зображення не буде виходити за межі контейнера */
-    height: auto; /* Зберігає пропорції зображення */
-    display: block; /* Усуває зайві пробіли під зображенням */
-    margin: 0 auto; /* Центрує зображення (за потреби) */
+    max-width: 100%;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
 }
 
 @media (max-width: 768px) {
@@ -1416,7 +1416,7 @@ textarea[name="feedback"]:valid {
   }
 }
 /*=============================================
-=            Responsive styles for comment form =
+= Responsive styles for comment form =
 =============================================*/
 .comment-form {
   width: auto;
@@ -1439,8 +1439,6 @@ textarea[name="feedback"]:valid {
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  /* background-color: var(--defolt-white-color);
-  color: var(--defolt-white-color); */
 }
 
 .comments-title {
@@ -1563,13 +1561,10 @@ textarea[name="feedback"]:valid {
   border-radius: 0.5rem;
   max-width: 50rem;
   margin: 0 auto;
-  /* background-color: #f9f9f9; */
-  /* box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); */
 }
 
 .article-title {
   text-align: center;
-  /* color: #333; */
   margin-bottom: 1rem;
 }
 
@@ -1653,7 +1648,7 @@ textarea[name="feedback"]:valid {
 }
 
 /*=============================================
-=            Responsive styles for article form          =
+= Responsive styles for article form          =
 =============================================*/
 
 @media (max-width: 768px) {

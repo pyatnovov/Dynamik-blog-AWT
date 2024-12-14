@@ -41,7 +41,7 @@
       <div class="medzi-div">
       <h1 class="header-title">My Blog about Travels</h1>
       <div id="user-info" class="hiddenElm">
-        <img id="user-pic" src="" alt="User Picture" />
+        <img id="user-pic" src="q" alt="User Picture" />
         <span id="user-name"></span>
         <button id="sign-out-button">Sign Out</button>
       </div>
@@ -62,7 +62,7 @@
         <nav id="menuIts" class="menu mnHide">
           <a href="#welcome">Welcome!</a>
           <a href="#articles/1/20/0">Articles</a>
-        <a href="#myArticles/1/1">My Articles</a>
+          <a href="#myArticles/1/1">My Articles</a>
           <a href="#artInsert">Add articles</a>
           <a href="#opinions">Visitor opinions</a>
           <a href="#addOpinion">Add your opinion</a>
@@ -570,9 +570,6 @@
 
     <label for="tags" class="form-label">Keywords:</label>
     <input type="text" name="tags" id="tags" value="{{tags}}" class="form-input" placeholder="e.g. village, drama" />
-    <!-- Приховуємо поле для тегів -->
-    <!-- <input type="hidden" name="tags" id="tags" value="{{tags}}" /> -->
-
 
     <div class="form-buttons">
     <button type="reset" class="button reset-button">Reset Form</button>
@@ -585,7 +582,6 @@
     </article>
     </script>
 
-
     <script id="template-my-articles" type="text/template">
       <div class="container layout">
         <div class="opinionsContainer">
@@ -595,7 +591,9 @@
               <h2><a href="{{detailLink}}">{{title}}</a></h2> 
               <p>by {{author}}</p>
               <p>{{{content}}}</p>
+              {{#tags}}
                 <p>#{{tags}}</p>
+              {{/tags}}
             </article>
           {{/articles}}
 
@@ -606,7 +604,7 @@
       </div>
     </script>
 
-    <script type="module" src="js/index.js"></script>
+
 
     <script>
       // Глобальный объект для хранения данных пользователя
@@ -679,5 +677,6 @@
     </script>
 
     <script src="https://accounts.google.com/gsi/client"></script>
+    <script type="module" src="js/index.js"></script>
   </body>
 </html>
