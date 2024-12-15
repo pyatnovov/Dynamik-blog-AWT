@@ -449,67 +449,7 @@ function addComment(artId, author, text, callback) {
   xhr.send(JSON.stringify(data));
 }
 
-function fetchAndDisplayArticles(
-  targetElm,
-  pageNumberFromHash,
-  totalPagesFromHash
-) {
-  let pageNumber = parseInt(pageNumberFromHash);
-  if (isNaN(pageNumber) || pageNumber < 1) {
-    pageNumber = 1;
-  }
 
-  const offset = (pageNumber - 1) * articlesPerPage;
-  const url = `${urlBase}/article?offset=${offset}&max=${articlesPerPage}`;
-
-  const ajax = new XMLHttpRequest();
-  ajax.open("GET", url, true);
-
-  ajax.onload = function () {
-    if (this.status === 200) {
-      const responseData = JSON.parse(this.responseText);
-
-      let totalArticles =
-        responseData.meta && responseData.meta.totalCount
-          ? parseInt(responseData.meta.totalCount)
-          : (pageNumber - 1) * articlesPerPage + responseData.articles.length;
-
-      const totalPages = Math.ceil(totalArticles / articlesPerPage);
-
-      if (!totalPagesFromHash || parseInt(totalPagesFromHash) !== totalPages) {
-        window.location.hash = `#articles/${pageNumber}/${totalPages}`;
-        return;
-      }
-
-      addArtDetailLink2ResponseJson(
-        { articles: responseData.articles },
-        pageNumber,
-        totalPages
-      );
-
-      const dataForRender = {
-        articles: responseData.articles,
-        currPage: pageNumber,
-        pageCount: totalPages,
-        prevPage: pageNumber > 1 ? pageNumber - 1 : null,
-        nextPage: pageNumber < totalPages ? pageNumber + 1 : null,
-      };
-
-      const articlesTemplate =
-        document.getElementById("template-articles").innerHTML;
-      const rendered = Mustache.render(articlesTemplate, dataForRender);
-      document.getElementById(targetElm).innerHTML = rendered;
-    } else {
-      alert("Error: " + this.statusText);
-    }
-  };
-
-  ajax.onerror = function () {
-    alert("Network error while retrieving articles.");
-  };
-
-  ajax.send();
-}
 
 function createHtml4opinions(targetElm) {
   const opinionsFromStorage = localStorage.feedback;
@@ -654,27 +594,105 @@ function fetchAndDisplayMyArticles(targetElm) {
     if (this.status === 200) {
       const responseData = JSON.parse(this.responseText);
 
+      // Filter and fetch detailed content for each article
       const filteredArticles = responseData.articles
         .filter((article) => article.tags.includes(HIDDEN_TAG))
-        .map((article) => {
-          // Видаляємо тег travelBlog
-          const visibleTags = article.tags.filter((tag) => tag !== HIDDEN_TAG);
-          return {
-            ...article,
+        .map((article) =>
+          fetchArticleContent(article.id).then((articleDetails) => ({
+            ...articleDetails,
             detailLink: `#article/${article.id}/1/1/1`,
-            tags: visibleTags.join(", "), // Об'єднуємо залишені теги
+            tags: articleDetails.tags
+              .filter((tag) => tag !== HIDDEN_TAG)
+              .join(", "),
+          }))
+        );
+
+      Promise.all(filteredArticles)
+        .then((articlesWithContent) => {
+          const dataForRender = {
+            articles: articlesWithContent,
           };
+
+          const articlesTemplate = document.getElementById(
+            "template-my-articles"
+          ).innerHTML;
+          const rendered = Mustache.render(articlesTemplate, dataForRender);
+          document.getElementById(targetElm).innerHTML = rendered;
+        })
+        .catch((error) => {
+          console.error("Error fetching detailed articles: ", error);
+          alert("Failed to load My Articles.");
         });
+    } else {
+      alert("Error: " + this.statusText);
+    }
+  };
 
-      const dataForRender = {
-        articles: filteredArticles,
-      };
+  ajax.onerror = function () {
+    alert("Network error while retrieving My Articles.");
+  };
 
-      const articlesTemplate = document.getElementById(
-        "template-my-articles"
-      ).innerHTML;
-      const rendered = Mustache.render(articlesTemplate, dataForRender);
-      document.getElementById(targetElm).innerHTML = rendered;
+  ajax.send();
+}
+
+
+
+function fetchAndDisplayArticles(
+  targetElm,
+  pageNumberFromHash,
+  totalPagesFromHash
+) {
+  let pageNumber = parseInt(pageNumberFromHash);
+  if (isNaN(pageNumber) || pageNumber < 1) {
+    pageNumber = 1;
+  }
+
+  const offset = (pageNumber - 1) * articlesPerPage;
+  const url = `${urlBase}/article?offset=${offset}&max=${articlesPerPage}`;
+
+  const ajax = new XMLHttpRequest();
+  ajax.open("GET", url, true);
+
+  ajax.onload = function () {
+    if (this.status === 200) {
+      const responseData = JSON.parse(this.responseText);
+
+      let totalArticles =
+        responseData.meta && responseData.meta.totalCount
+          ? parseInt(responseData.meta.totalCount)
+          : (pageNumber - 1) * articlesPerPage + responseData.articles.length;
+
+      const totalPages = Math.ceil(totalArticles / articlesPerPage);
+
+      if (!totalPagesFromHash || parseInt(totalPagesFromHash) !== totalPages) {
+        window.location.hash = `#articles/${pageNumber}/${totalPages}`;
+        return;
+      }
+
+      // Fetch details for each article to get the content
+      const articlesWithContentPromises = responseData.articles.map((article) =>
+        fetchArticleContent(article.id)
+      );
+
+      Promise.all(articlesWithContentPromises)
+        .then((articlesWithContent) => {
+          const dataForRender = {
+            articles: articlesWithContent,
+            currPage: pageNumber,
+            pageCount: totalPages,
+            prevPage: pageNumber > 1 ? pageNumber - 1 : null,
+            nextPage: pageNumber < totalPages ? pageNumber + 1 : null,
+          };
+
+          const articlesTemplate =
+            document.getElementById("template-articles").innerHTML;
+          const rendered = Mustache.render(articlesTemplate, dataForRender);
+          document.getElementById(targetElm).innerHTML = rendered;
+        })
+        .catch((error) => {
+          console.error("Error fetching article content: ", error);
+          alert("Failed to load full article content.");
+        });
     } else {
       alert("Error: " + this.statusText);
     }
@@ -685,4 +703,27 @@ function fetchAndDisplayMyArticles(targetElm) {
   };
 
   ajax.send();
+}
+
+function fetchArticleContent(articleId) {
+  return new Promise((resolve, reject) => {
+    const url = `${urlBase}/article/${articleId}`;
+    const ajax = new XMLHttpRequest();
+    ajax.open("GET", url, true);
+
+    ajax.onload = function () {
+      if (this.status === 200) {
+        const articleDetails = JSON.parse(this.responseText);
+        resolve(articleDetails);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+
+    ajax.onerror = function () {
+      reject(new Error("Network error while fetching article details."));
+    };
+
+    ajax.send();
+  });
 }
