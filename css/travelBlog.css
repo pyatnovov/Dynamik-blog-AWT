@@ -442,11 +442,6 @@ article p {
   padding: 1.25rem;
   text-align: center;
 }
-.article_main {
-  display: flex;
-  flex-direction: row;
-  gap: 3.125rem;
-}
 
 .description {
   margin: 1.25rem 0;
@@ -1716,3 +1711,228 @@ textarea[name="feedback"]:valid {
   }
 }
 /*=====  End of Add article form   ======*/
+.about_section {
+  padding: 1.25rem;
+  text-align: center;
+}
+.about_us_title {
+  color: var(--defolt-white-color);
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.about-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  flex-wrap: wrap;
+  margin-bottom: 6.25rem;
+}
+.about-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20.938rem;
+  height: 18.313rem;
+  padding: 1.563rem 0.938rem;
+  margin: 0;
+  transition: transform 0.6s ease;
+}
+.about-item:hover {
+  background-color: var(--hover-card-color);
+  transform: rotateY(20deg);
+}
+.about-item h2 {
+  display: flex;
+  justify-content: center;
+  color: var(--defolt-white-color);
+  margin-bottom: 0.625rem;
+}
+
+.about-item p {
+  font-weight: 700;
+}
+.team-section {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1.25rem;
+  background-color: #1c1c1c;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 0.625rem rgba(0, 0, 0, 0.5);
+  max-width: 50rem;
+  color: var(--primary-text-color);
+}
+
+.team-section h2 {
+  color: var(--defolt-white-color);
+  font-size: 2.25rem;
+  margin-bottom: 0.9375rem;
+  text-align: center;
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  gap: 1.25rem;
+}
+
+.team-member img {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+  border: 0.1875rem solid var(--defolt-white-color);
+}
+
+.team-member h3 {
+  font-size: 1.5rem;
+  color: var(--defolt-white-color);
+  margin-bottom: 0.3125rem;
+}
+
+.team-member p {
+  font-size: 1rem;
+  color: var(--primary-text-color);
+}
+
+@media (max-width: 768px) {
+  .team-member {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .team-member img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .mission-section h2,
+  .goals-section h2,
+  .history-section h2,
+  .team-section h2 {
+    font-size: 1.75rem;
+  }
+}
+
+.advantages-section {
+  padding: 1.25rem;
+}
+
+.advantages-title {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 1.875rem;
+  font-weight: 700;
+  color: var(--defolt-white-color);
+}
+
+.advantages-item {
+  display: flex;
+  width: 20.938rem;
+  height: 11.313rem;
+  padding: 0.9375rem 0.625rem;
+  color: var(--primary-text-color);
+  text-align: center;
+  font-weight: 700;
+  transition: transform 0.6s ease;
+}
+.advantages-item:hover {
+  transform: rotateY(20deg);
+}
+.advantages-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+@media (min-width: 1200px) {
+  .advantages-list {
+    width: 1030px;
+  }
+  .advantages-item {
+    width: 30.938rem;
+    height: 11.313rem;
+  }
+}
+
+.advantages-item:hover {
+  background-color: var(--hover-card-color);
+}
+/*=====  End of About us section style  ======*/
+
+
+
+
+/*=============================================
+=            Tips section style            =
+=============================================*/
+
+.tips-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  background-color: #1c1c1c;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 0.625rem rgba(0, 0, 0, 0.5);
+  max-width: 50rem;
+}
+
+.tips-title {
+  color: var(--defolt-white-color);
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.tips-list {
+  padding-left: 0;
+  margin: 0;
+}
+
+.tip-item {
+  margin-bottom: 1.25rem;
+  padding: 0.9375rem;
+  background-color: #333;
+  border-radius: 0.3125rem;
+  transition: transform 0.6s ease;
+}
+.tip-item:hover {
+  transform: rotateY(20deg);
+}
+
+.tip-title {
+  font-size: 1.25rem;
+  color: var(--defolt-white-color);
+  margin-bottom: 0.625rem;
+}
+
+.tip-text {
+  font-size: 1rem;
+  color: var(--primary-text-color);
+}
+
+.tip-item:hover {
+  background-color: var(--hover-card-color);
+}
+
+/*=====  End of Tips section style  ======*/
