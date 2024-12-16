@@ -224,12 +224,7 @@ function editArticle(
   );
 }
 
-function addArtDetailLink2ResponseJson(responseData, pageNumber, totalPages) {
-  responseData.articles = responseData.articles.map((article) => ({
-    ...article,
-    detailLink: `#article/${article.id}/${pageNumber}/${totalPages}/1`,
-  }));
-}
+
 
 function fetchAndDisplayArticleDetail(
   targetElm,
@@ -594,7 +589,6 @@ function fetchAndDisplayMyArticles(targetElm) {
     if (this.status === 200) {
       const responseData = JSON.parse(this.responseText);
 
-      // Filter and fetch detailed content for each article
       const filteredArticles = responseData.articles
         .filter((article) => article.tags.includes(HIDDEN_TAG))
         .map((article) =>
@@ -635,8 +629,6 @@ function fetchAndDisplayMyArticles(targetElm) {
   ajax.send();
 }
 
-
-
 function fetchAndDisplayArticles(
   targetElm,
   pageNumberFromHash,
@@ -669,7 +661,6 @@ function fetchAndDisplayArticles(
         return;
       }
 
-      // Fetch details for each article to get the content
       const articlesWithContentPromises = responseData.articles.map((article) =>
         fetchArticleContent(article.id)
       );
@@ -726,4 +717,11 @@ function fetchArticleContent(articleId) {
 
     ajax.send();
   });
+}
+
+function addArtDetailLink2ResponseJson(responseData, pageNumber, totalPages) {
+  responseData.articles = responseData.articles.map((article) => ({
+    ...article,
+    detailLink: `#article/${article.id}/${pageNumber}/${totalPages}/1`,
+  }));
 }
